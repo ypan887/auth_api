@@ -20,6 +20,11 @@ describe 'users', type: :request do
     end
   end
 
-  describe 'create through omniauth' do
+  describe 'sign in through omniauth twitter' do
+    subject { get "/auth/twitter" }
+    it 'should redirect to twitter authorize url' do
+      expect(subject).to redirect_to("/omniauth/twitter?resource_class=User")
+      expect(response.status).to eq(301)
+    end
   end
 end
